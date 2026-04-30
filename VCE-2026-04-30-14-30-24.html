@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... (rest of the HTML remains the same) -->
+</head>
+<body>
+    <!-- ... (rest of the HTML remains the same) -->
+
+    <section id="login-section">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="email" id="login-email" placeholder="Email" required oninput="validateInput('login-email', 'login-email-error', 'email')">
+            <p class="error" id="login-email-error"></p>
+            <div class="password-container">
+                <input type="password" id="login-password" placeholder="Password" required oninput="validateInput('login-password', 'login-password-error', 'password')">
+                <span class="password-toggle" onclick="togglePassword('login-password')">Show</span>
+            </div>
+            <p class="error" id="login-password-error"></p>
+            <button type="submit">Login</button>
+            <p class="error" id="login-error"></p>
+        </form>
+        <!-- ... (rest of the HTML remains the same) -->
+    </section>
+
+    <section id="signup-section">
+        <h2>Sign up</h2>
+        <form id="signup-form">
+            <input type="email" id="signup-email" placeholder="Email" required oninput="validateInput('signup-email', 'signup-email-error', 'email')">
+            <p class="error" id="signup-email-error"></p>
+            <div class="password-container">
+                <input type="password" id="signup-password" placeholder="Password min 6 chars" required oninput="validateInput('signup-password', 'signup-password-error', 'password')">
+                <span class="password-toggle" onclick="togglePassword('signup-password')">Show</span>
+            </div>
+            <p class="error" id="signup-password-error"></p>
+            <button type="submit">Sign up</button>
+            <p class="error" id="signup-error"></p>
+        </form>
+        <!-- ... (rest of the HTML remains the same) -->
+    </section>
+
+    <!-- ... (rest of the HTML remains the same) -->
+
+    <script type="module">
+        // ... (rest of the JavaScript remains the same)
+
+        function validateInput(id, errorId, type) {
+            const input = document.getElementById(id);
+            const errorEl = document.getElementById(errorId);
+            const value = input.value.trim();
+
+            if (type === 'email') {
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                    errorEl.textContent = 'Invalid email format';
+                    return false;
+                }
+            } else if (type === 'password') {
+                if (value.length < 6) {
+                    errorEl.textContent = 'Password must be 6+ characters';
+                    return false;
+                }
+            }
+
+            errorEl.textContent = '';
+            return true;
+        }
+
+        // ... (rest of the JavaScript remains the same)
+
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('signup-email');
+            const password = document.getElementById('signup-password');
+            const errorEl = document.getElementById('signup-error');
+            
+            if (!validateInput('signup-email', 'signup-email-error', 'email') || 
+                !validateInput('signup-password', 'signup-password-error', 'password')) {
+                return;
+            }
+
+            // ... (rest of the submit handler remains the same)
+        });
+
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email');
+            const password = document.getElementById('login-password');
+            const errorEl = document.getElementById('login-error');
+            
+            if (!validateInput('login-email', 'login-email-error', 'email') || 
+                !validateInput('login-password', 'login-password-error', 'password')) {
+                return;
+            }
+
+            // ... (rest of the submit handler remains the same)
+        });
+
+        // ... (rest of the JavaScript remains the same)
+    </script>
+</body>
+</html>
